@@ -96,6 +96,12 @@ vt100.o		: vt100.c		vt100.h		global.h
 gps.o			: gps.c			gps.h			global.h
 $(TRG).o		: $(TRG).c						global.h
 
+hex:
+	avr-gcc -Os -DF_CPU=8000000 -mmcu=attiny85 -c led_flash.c
+	avr-gcc -DF_CPU=8000000 -mmcu=attiny85 -o led_flash.elf led_flash.o
+	avr-objcopy -O ihex $(TRG).elf $(TRG).hex
+	rm $(TRG).o
+	rm $(TRG).elf
 
 AVRDUDE=avrdude -p m168 -c gpio -F
 load:	$(TRG).hex

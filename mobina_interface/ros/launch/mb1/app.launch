@@ -1,11 +1,10 @@
 <?xml version="1.0"?>
 <launch>
 
-    <include file="$(find mobina_states)/ros/launch/MsWissenschaft.launch" />
+    <include file="$(find mobina_states)/ros/launch/call_to_lunch.launch" />
 
-    <include file="$(find mobina_interface)/ros/launch/kinect2.launch" />
     <include file="$(find turtlebot_navigation)/amcl_demo.launch">
-	<arg name="map_file" value="$(find mobina_states)/ros/config/$(env ROBOT)/pflegelabor.yaml"/>
+	<arg name="map_file" value="$(find mobina_states)/ros/config/$(env ROBOT_ENV)/map.yaml"/>
     </include>
 
 </launch>

@@ -1,0 +1,16 @@
+<?xml version="1.0"?>
+<launch>
+
+<param name="use_sim_time" value="true" />
+
+    <include file="$(find ratslam_ros)/launch/test_officeE418_2.launch" />
+    
+    <node pkg="rosbag" type="record" name="record" args="/cpu_load /PoseCell/MapImage /PoseCell/TopologicalAction /PoseCell/MapMarker /tf /ExperienceMap/Map /ExperienceMap/MapMarker /ExperienceMap/PathToGoal /ExperienceMap/RobotPose /ExperienceMap/SetGoalPose /LocalView/Template -O '$DIR/results/$FN.rat.bag'" />
+
+    <node pkg="fb_eval" type="play.py" name="play" args="'$DIR/$FN_O' '$DIR/$FN'" required="true"/>
+    
+    <node pkg="cpu_load" type="cpu_load" name="cpu_load" args="ratslam_pc" />
+
+  
+</launch>
+
