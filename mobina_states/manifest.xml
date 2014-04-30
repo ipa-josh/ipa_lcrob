@@ -14,8 +14,6 @@
   <depend package="mobina_interface"/>
   <depend package="turtlebot_node"/>
   <depend package="cob_generic_states_experimental"/>
-  <depend package="cob_fall_detection" />
-  <depend package="cob_object_detection_msgs" />
   <depend package="turtlebot_node" />
 
 </package>

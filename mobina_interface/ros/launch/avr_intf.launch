@@ -1,7 +1,7 @@
 <?xml version="1.0"?>
 <launch>
 
-    <include file="$(find mobina_interface)/ros/launch/upload_params.launch" />
+    <include file="$(find mobina_bringup)/ros/launch/upload_params.launch" />
 
     <node pkg="ipa_odroidx_interface" type="odroidx_interface.py" name="odroidx_interface" output="screen" launch-prefix="nice" respawn="true">
          <param name="analog_channels" value="1" />

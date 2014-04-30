@@ -2,6 +2,7 @@
 <launch>
 
     <rosparam command="load" ns="/script_server/base" file="$(find mobina_states)/ros/config/navigation_goals.yaml"/>
+    <rosparam command="load" ns="/script_server/tray" file="$(find mobina_states)/ros/config/$(env ROBOT)/tray_positions.yaml"/>
 
     <node pkg="mobina_states" type="DeliverCake.py" name="deliver_cake" output="screen">
     </node>

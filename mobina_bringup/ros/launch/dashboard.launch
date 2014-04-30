@@ -9,7 +9,7 @@
 	<!-- start command_gui -->
 	<node ns="command_gui" pkg="cob_command_gui" type="knoeppkes.py" name="$(anon command_gui_node)" cwd="node" respawn="false" output="screen" >
 		<!-- upload button parameters, but delete the old ones before -->
-		<rosparam command="load" ns="control_buttons" file="$(find mobina_interface)/ros/config/$(arg robot)/control_buttons.yaml"/>
-		<!--rosparam command="load" ns="nav_buttons" file="$(find mobina_interface)/ros/config/$(arg robot)/nav_buttons.yaml"/-->
+		<rosparam command="load" ns="control_buttons" file="$(find mobina_config)/ros/config/$(arg robot)/control_buttons.yaml"/>
+		<!--rosparam command="load" ns="nav_buttons" file="$(find mobina_config)/ros/config/$(arg robot)/nav_buttons.yaml"/-->
 	</node>
 </launch>

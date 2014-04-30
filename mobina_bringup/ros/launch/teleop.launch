@@ -12,7 +12,7 @@
 
     <node pkg="cob_teleop" type="cob_teleop" name="teleop_node" ns="teleop" output="screen">
 	<remap from="/cmd_vel_safety" to="/cmd_vel"/>
-	<rosparam command="load" ns="/teleop" file="$(find mobina_interface)/ros/config/teleop.yaml"/>
+	<rosparam command="load" ns="/teleop" file="$(find mobina_config)/ros/config/teleop.yaml"/>
     </node>
 </launch>
 

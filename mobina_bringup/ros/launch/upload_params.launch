@@ -3,9 +3,9 @@
 
         <!-- send ROBOT parameters to parameter server -->
         <!--rosparam command="load" ns="/script_server/base" file="$(find mobina_interface)/ros/config/joint_configurations.yaml"/-->
-	<rosparam command="load" ns="/script_server/base" file="$(find mobina_interface)/ros/config/env/$(env ROBOT_ENV)/navigation_goals.yaml"/>
-        <rosparam command="load" ns="/script_server/tray" file="$(find mobina_interface)/ros/config/$(env ROBOT)/joint_configurations.yaml"/>
-        <rosparam command="load" ns="/script_server/light" file="$(find mobina_interface)/ros/config/light.yaml"/>
+	<rosparam command="load" ns="/script_server/base" file="$(find mobina_config)/ros/config/env/$(env ROBOT_ENV)/navigation_goals.yaml"/>
+        <rosparam command="load" ns="/script_server/tray" file="$(find mobina_config)/ros/config/$(env ROBOT)/joint_configurations.yaml"/>
+        <rosparam command="load" ns="/script_server/light" file="$(find mobina_config)/ros/config/light.yaml"/>
 
 </launch>
 

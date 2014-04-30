@@ -1,10 +1,10 @@
 <?xml version="1.0"?>
 <launch>
-    <include file="$(find mobina_interface)/ros/launch/gyro.launch" />
+    <include file="$(find mobina_bringup)/ros/launch/gyro.launch" />
     <include file="$(find turtlebot_bringup)/minimal.launch" />
 
     <include file="$(find mobina_interface)/ros/launch/avr_intf.launch" />
-    <include file="$(find mobina_interface)/ros/launch/teleop.launch" />
+    <include file="$(find mobina_bringup)/ros/launch/teleop.launch" />
 
 </launch>
 

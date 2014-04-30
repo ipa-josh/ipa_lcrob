@@ -17,7 +17,6 @@
   <depend package="actionlib"/>
   <depend package="ipa_odroidx_interface"/>
   <depend package="brics_actuator"/>
-  <depend package="imu_filter_madgwick"/>
 
 </package>
 

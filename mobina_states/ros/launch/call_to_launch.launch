@@ -1,7 +1,8 @@
 <?xml version="1.0"?>
 <launch>
 
-    <rosparam command="load" ns="/script_server/base" file="$(find mobina_states)/ros/config/navigation_goals.yaml"/>
+    <rosparam command="load" ns="/script_server/base" file="$(find mobina_states)/ros/config/$(env ROBOT_ENV)/navigation_goals.yaml"/>
+    <rosparam command="load" ns="/script_server/tray" file="$(find mobina_states)/ros/config/$(env ROBOT)/tray_positions.yaml"/>
 
     <node pkg="mobina_states" type="CallToLaunch.py" name="call_to_launch" output="screen">
     </node>
