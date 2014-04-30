@@ -1,0 +1,14 @@
+<package>
+  <description brief="mobina_config">
+
+     mobina_config
+
+  </description>
+  <author>josh</author>
+  <license>BSD</license>
+  <review status="unreviewed" notes=""/>
+  <url>http://ros.org/wiki/mobina_config</url>
+
+</package>
+
+

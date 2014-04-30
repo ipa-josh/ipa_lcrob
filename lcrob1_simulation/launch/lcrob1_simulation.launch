@@ -1,5 +1,0 @@
-<launch>
-	<include file="$(find gazebo_worlds)/launch/empty_world.launch" />
-	<include file="$(find lcrob1_description)/launch/create_mobile_base.launch" />
-	<node name="range_to_exrange" pkg="lcrob1_simulation" type="range_to_exrange" />
-</launch>

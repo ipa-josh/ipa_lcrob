@@ -1,7 +1,0 @@
-<?xml version="1.0"?>
-<launch>
-
-    <include file="$(find mobina_states)/ros/launch/MsWissenschaft.launch" />
-
-</launch>
-

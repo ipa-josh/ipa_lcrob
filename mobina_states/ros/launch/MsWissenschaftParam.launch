@@ -1,8 +1,0 @@
-<?xml version="1.0"?>
-<launch>
-
-    <rosparam command="load" ns="/script_server/base" file="$(find mobina_states)/ros/config/$(env ROBOT)/navigation_goals_ms_wissenschaft.yaml"/>
-    <rosparam command="load" ns="/script_server/tray" file="$(find mobina_states)/ros/config/$(env ROBOT)/tray_ms_wissenschaft.yaml"/>
-
-</launch>
-

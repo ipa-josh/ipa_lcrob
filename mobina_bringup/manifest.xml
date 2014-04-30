@@ -1,0 +1,20 @@
+<package>
+  <description brief="mobina_bringup">
+
+     mobina_bringup
+
+  </description>
+  <author>josh</author>
+  <license>BSD</license>
+  <review status="unreviewed" notes=""/>
+  <url>http://ros.org/wiki/mobina_bringup</url>
+
+  <depend package="mobina_interface"/>
+  <depend package="mobina_config"/>
+  <depend package="imu_filter_madgwick"/>
+  <depend package="pointcloud_to_laserscan"/>
+  <!--depend package="openni2_camera/"/--> <!-- depends on used camera -->
+
+</package>
+
+
