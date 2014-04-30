@@ -39,5 +39,7 @@ if (NOT EXISTS "${AVRLIB_DOWNLOAD_PATH}")
     execute_process(COMMAND unzip -o "${AVRLIB_DOWNLOAD_PATH}" -d "${AVRLIB_EXTRACTED_DIR}")
 endif()
 
-execute_process(COMMAND bash -c "cd ../mc && make && sudo make load")
+MESSAGE( STATUS "make & upload to extension board")
+MESSAGE( STATUS "perhaps you'll need root rights")
+execute_process(COMMAND bash -c "cd ../mc && make && make load")
 
