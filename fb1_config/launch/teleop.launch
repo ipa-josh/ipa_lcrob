@@ -1,0 +1,18 @@
+<?xml version="1.0"?>
+<launch>
+
+    <arg name="debug" default="false" />
+
+    <node pkg="fb1_config" type="evjoy3.py" name="evjoy" output="screen">
+		<rosparam param="axes">['!ABS_Y','!ABS_RX',~ABS_HAT0X,~ABS_HAT0Y]</rosparam>
+		<rosparam param="buttons">[BTN_TR,ABS_RZ,BTN_Y,BTN_B,BTN_GAMEPAD,BTN_X,BTN_TL,BTN_SELECT]</rosparam>
+		<param name="nullzone" type="double" value="0.12"/>
+		<param name="debug" type="boolean" value="$(arg debug)"/>
+    </node>
+
+    <node pkg="cob_teleop" type="cob_teleop" name="teleop_node" ns="teleop" output="screen">
+		<remap from="/cmd_vel_safety" to="/cmd_vel"/>
+		<rosparam command="load" ns="/teleop" file="$(find fb1_config)/config/teleop.yaml"/>
+    </node>
+</launch>
+

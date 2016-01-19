@@ -1,0 +1,57 @@
+# common params
+run_factor: 1.5
+
+# buttons
+lower_neck_button: -1
+upper_neck_button: -1
+tray_button: 2
+arm_joint12_button: -1
+arm_joint34_button: -1
+arm_joint56_button: -1
+arm_joint7_button: -1
+deadman_button: 0
+run_button: 1
+base_safety_button: -1
+
+special_button: 6
+script_button: 7
+
+led_r_button: 3
+led_g_button: 4
+led_b_button: 5
+led_step: 0.1
+led_step_pulse: 0.004
+led_pulse_button: 2
+
+script_button0: 2
+script_button1: 3
+script_button2: 5
+script_button3: 4
+
+#script0: "rosrun mobina_states test_play.py a b c"
+script0: "rosrun cob_script_server light.py 1 1 1"
+script1: "rosrun mobina_states check.py"
+#script1: "rosrun mobina_states search_dock.py"
+#script2: "roslaunch cob_camera_alignment mobina.launch"
+script2: "rosrun mobina_states set_mode.py safe"
+script3: "python /home/mobina/ros/cob_object_perception_intern/cob_fall_detection/test.py" #"rosrun mobina_states test_play.py a b c d e f g"
+
+# axes
+axis_vx: 0
+axis_vy: -1
+axis_vth: 1
+up_down: 2 #tray--up/down; tilt--front/back, here we just name up_down
+left_right: -1 #pan--left/right
+
+# component configuration
+modules: {
+  base: {
+    max_velocity: [0.35, 0.0, 3.5],
+    max_acceleration: [1.0, 0.0, 2.0]
+  },
+  tray: {
+    joint_names: ['tray_joint'],
+    joint_step: [1.0]
+  },
+}
+
