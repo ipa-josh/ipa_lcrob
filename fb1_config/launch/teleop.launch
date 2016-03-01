@@ -10,7 +10,7 @@
 		<param name="debug" type="boolean" value="$(arg debug)"/>
     </node>
 
-    <node pkg="cob_teleop" type="cob_teleop" name="teleop_node" ns="teleop" output="screen">
+    <node pkg="cob_teleop" type="cob_teleop" name="teleop" ns="teleop" output="screen">
 		<remap from="/cmd_vel_safety" to="/cmd_vel"/>
 		<rosparam command="load" ns="/teleop" file="$(find fb1_config)/config/teleop.yaml"/>
     </node>
