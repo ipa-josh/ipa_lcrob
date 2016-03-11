@@ -10,5 +10,4 @@
         <remap from="map" to="map_karto"/>
         <remap from="karto_association" to="FeatureAssociationList" />
     </node>
-  </group>
 </launch>
