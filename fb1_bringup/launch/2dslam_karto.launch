@@ -1,0 +1,14 @@
+<?xml version="1.0"?>
+<launch>
+    <node pkg="cob_karto" type="slam_karto" name="slam_karto" output="screen">
+        <!-- load karto parameters -->
+        <rosparam file="$(find fb1_config)/config/karto_params_rplidar.yaml" command="load" />
+        <!-- input -->
+        <!-- <remap from="scan" to="scan_top"/> -->
+        <remap from="leading_frame_pose" to="state_ekf"/>
+        <!-- output -->
+        <remap from="map" to="map_karto"/>
+        <remap from="karto_association" to="FeatureAssociationList" />
+    </node>
+  </group>
+</launch>
