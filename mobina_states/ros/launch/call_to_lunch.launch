@@ -3,7 +3,7 @@
 
     <rosparam command="load" ns="/script_server/base" file="$(find mobina_states)/ros/config/navigation_goals.yaml"/>
 
-    <node pkg="mobina_states" type="CallToLaunch.py" name="call_to_launch" output="screen">
+    <node pkg="mobina_states" type="CallToLunch.py" name="call_to_lunch" output="screen">
     </node>
 
 
