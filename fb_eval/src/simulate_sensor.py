@@ -7,10 +7,10 @@ import numpy as np
 
 #settings
 min_range = 0.1
-max_range = 2.0
+max_range = 2.5
 angle_factor = 4
-min_angle = -1.0
-max_angle =  1.0
+min_angle = -1.5
+max_angle =  1.5
 deviation = 0.05
 noises=[]
 
@@ -38,6 +38,8 @@ if args.max_angle!=None:
 if args.deviation!=None:
 	deviation = args.deviation
 
+min_angle+=math.pi/2
+max_angle+=math.pi/2
 
 def simulate_sensor(scan_in):
 	global min_range,max_range,angle_factor,min_angle,max_angle,deviation,noises
@@ -60,7 +62,7 @@ def simulate_sensor(scan_in):
 		if a<min_angle or a>max_angle or i%angle_factor!=0: continue
 		
 		scan_out.angle_min = min(scan_out.angle_min, a)
-		scan_out.angle_max = max(scan_out.angle_max, a+scan_out.angle_increment)
+		scan_out.angle_max = max(scan_out.angle_max, a)
 		
 		noise = 0
 		if scan_in.ranges[i]!=np.nan and scan_in.ranges[i]!=np.inf and scan_in.ranges[i]!=-np.inf:
