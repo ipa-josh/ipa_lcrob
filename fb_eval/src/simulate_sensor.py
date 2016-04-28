@@ -15,9 +15,10 @@ min_angle = -1.5
 max_angle =  1.5
 deviation = 0.05
 odom_noise= 0.0
+img_noise = 0.0
 noises=[]
-
 parser = argparse.ArgumentParser(description='')
+
 parser.add_argument('fn', type=str)
 parser.add_argument('--min_range', type=float)
 parser.add_argument('--max_range', type=float)
@@ -45,7 +46,7 @@ if args.deviation!=None:
 if args.odom_noise!=None:
 	odom_noise = args.odom_noise
 if args.img_noise!=None:
-	odom_noise = args.img_noise
+	img_noise = args.img_noise
 
 min_angle+=math.pi/2
 max_angle+=math.pi/2
@@ -58,41 +59,31 @@ def simulate_odom(msg):
 	msg_out = Odometry()
 	msg_out.header = msg.header
 	msg_out.child_frame_id = msg.child_frame_id
-	msg_out.twist = msg.twist
-	msg_out.pose.covariance = msg.pose.covariance
+	msg_out.pose = msg.pose
+	msg_out.pose.covariance  = msg.pose.covariance
+	msg_out.twist.covariance = msg.twist.covariance
 	
 	noise = np.random.normal(0, odom_noise, 6)
 	
-	msg_out.pose.pose.position.x = msg.pose.pose.position.x*(noise[0]+1)
-	msg_out.pose.pose.position.y = msg.pose.pose.position.x*(noise[1]+1)
-	msg_out.pose.pose.position.z = msg.pose.pose.position.x*(noise[2]+1)
+	msg_out.twist.twist.linear.x = msg.twist.twist.linear.x*(noise[0]+1)
+	msg_out.twist.twist.linear.y = msg.twist.twist.linear.x*(noise[1]+1)
+	msg_out.twist.twist.linear.z = msg.twist.twist.linear.x*(noise[2]+1)
 	
-	quaternion = (
-		msg.pose.pose.orientation.x,
-		msg.pose.pose.orientation.y,
-		msg.pose.pose.orientation.z,
-		msg.pose.pose.orientation.w)
-	euler = tf.transformations.euler_from_quaternion(quaternion)
-	roll  = euler[0]*(1+noise[3])
-	pitch = euler[1]*(1+noise[4])
-	yaw   = euler[2]*(1+noise[5])
+	msg_out.twist.twist.angular.x = msg.twist.twist.angular.x*(noise[3]+1)
+	msg_out.twist.twist.angular.y = msg.twist.twist.angular.x*(noise[4]+1)
+	msg_out.twist.twist.angular.z = msg.twist.twist.angular.x*(noise[5]+1)
 	
-	quaternion = tf.transformations.quaternion_from_euler(roll, pitch, yaw)
-	#type(pose) = geometry_msgs.msg.Pose
-	msg.pose.pose.orientation.x = quaternion[0]
-	msg.pose.pose.orientation.y = quaternion[1]
-	msg.pose.pose.orientation.z = quaternion[2]
-	msg.pose.pose.orientation.w = quaternion[3]
 
 	return msg_out
 	
-def noisy(noise_typ,image):
+def noisy(noise_typ,image,img_noise):
    if noise_typ == "gauss":
       row,col,ch= image.shape
       mean = 0
-      var = 0.1
+      var = 0.1*img_noise
       sigma = var**0.5
-      gauss = np.random.normal(mean,sigma,(row,col,ch))
+      gauss = (np.random.normal(mean,sigma,(row,col,ch))*256).astype(np.uint8)
+      #print gauss
       gauss = gauss.reshape(row,col,ch)
       noisy = image + gauss
       return noisy
@@ -113,12 +104,12 @@ def noisy(noise_typ,image):
               for i in image.shape]
       out[coords] = 0
       return out
-  elif noise_typ == "poisson":
+   elif noise_typ == "poisson":
       vals = len(np.unique(image))
       vals = 2 ** np.ceil(np.log2(vals))
       noisy = np.random.poisson(image * vals) / float(vals)
       return noisy
-  elif noise_typ =="speckle":
+   elif noise_typ =="speckle":
       row,col,ch = image.shape
       gauss = np.random.randn(row,col,ch)
       gauss = gauss.reshape(row,col,ch)        
@@ -126,21 +117,22 @@ def noisy(noise_typ,image):
       return noisy
       
 def simulate_img(img):
-	global img_noise
-	
-	if img_noise<=0: return img
-	
+    global img_noise
+    
+    if img_noise<=0: return img
+    
     try:
       bridge = CvBridge()
-      cv_image = bridge.imgmsg_to_cv2(data, "bgr8")
-      cv_image = noisy("gauss", cv_image)
-      msg = bridge.cv2_to_imgmsg(cv_image, "bgr8")
+      cv_image = bridge.imgmsg_to_cv2(img, img.encoding)
+      cv_image = noisy("gauss", cv_image, img_noise)
+      msg = bridge.cv2_to_imgmsg(cv_image, img.encoding)
       msg.header = img.header
+      return msg
     except CvBridgeError as e:
       print(e)
-	
-	return msg
-	
+    
+    return img #backup strategy
+
 def simulate_sensor(scan_in):
 	global min_range,max_range,angle_factor,min_angle,max_angle,deviation,noises
 	
@@ -186,8 +178,20 @@ fn = args.fn
 
 bagin = rosbag.Bag(fn)
 bag   = rosbag.Bag(os.path.splitext(fn)[0]+".out.bag", 'w')
+desc  = open(os.path.splitext(fn)[0]+".desc.txt", "w")
 
 try:
+    desc.write("min_range"+"\t"+str(min_range)+"\n")
+    desc.write("max_range"+"\t"+str(max_range)+"\n")
+    desc.write("angle_factor"+"\t"+str(angle_factor)+"\n")
+    desc.write("min_angle"+"\t"+str(min_angle)+"\n")
+    desc.write("max_angle"+"\t"+str(max_angle)+"\n")
+    desc.write("deviation"+"\t"+str(deviation)+"\n")
+    desc.write("odom_noise"+"\t"+str(odom_noise)+"\n")
+    desc.write("img_noise"+"\t"+str(img_noise)+"\n")
+    desc.close()
+
+    n=0
     for topic, msg, t in bagin.read_messages():
         if topic=="/scan":
             bag.write("/scan_old", msg, t)
@@ -195,20 +199,14 @@ try:
         elif topic=="/odom":
             bag.write("/odom_old", msg, t)
             bag.write(topic, simulate_odom(msg), t)
-        elif topic=="/img":
+        elif topic=="/usb_cam/image_raw":
             bag.write(topic+"_old", msg, t)
             bag.write(topic, simulate_img(msg), t)
         else:
             bag.write(topic, msg, t)
-		
-    '''str = String()
-    str.data = 'foo'
-
-    i = Int32()
-    i.data = 42
-
-    bag.write('chatter', str)
-    bag.write('numbers', i)'''
+            
+        #if n>10000: break
+        n+=1
 finally:
     bag.close()
     bagin.close()
