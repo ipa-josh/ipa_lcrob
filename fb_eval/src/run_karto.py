@@ -1,15 +1,19 @@
 #!/usr/bin/python
 
-import os
+import os, sys
+import rospkg
 
-FN=""
+for FN in sys.argv[1:]:
 
-#generate launch file
-t = open("template", "r")
-f = open("eval.launch", "w")
-f.write(t.read().replace("$FN", FN))
-f.close()
-t.close()
+	rospack = rospkg.RosPack()
+	path = rospack.get_path('fb_eval')
 
-#execute
-os.system("roslaunch fb_eval eval.launch")
+	#generate launch file
+	t = open(path+"/template", "r")
+	f = open(path+"/eval.launch", "w")
+	f.write(t.read().replace("$FN", FN).replace("$DIR", os.getcwd()))
+	f.close()
+	t.close()
+
+	#execute
+	os.system("roslaunch fb_eval eval.launch")

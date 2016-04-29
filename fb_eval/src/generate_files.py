@@ -1,11 +1,15 @@
 #!/usr/bin/python
 
-import os
+import os, sys
 
-FILES =["fb_robot2_meander1.bag", "fb_robot2_meander2.bag"]
+FILES =sys.argv[1:] #["fb_robot2_meander1.bag", "fb_robot2_meander2.bag"]
 DEV   =[0.0, 0.01, 0.02, 0.04, 0.08]
 ANGLES=[0.8, 1.0, 1.5, 2.0, 4.0]
 NOISES=[0.0, 0.025, 0.05, 0.1]
+
+#add extension
+for i in xrange(len(FILES)):
+	FILES[i] = FILES[i]+".bag"
 
 for fn in FILES:
 	for dev in DEV:
