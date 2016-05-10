@@ -3,11 +3,12 @@
 
 <param name="use_sim_time" value="true" />
 
-    <include file="$(find fb1_launch)/launch/2dslam_karto.launch" />
+    <include file="$(find fb1_bringup)/launch/2dslam_karto.launch" />
     
-    <node pkg="rosbag" type="record" name="record" args="/map_metadata /FeatureAssociationList /slam_karto/parameter_descriptions /visualization_marker_array /tf /slam_karto/parameter_updates /karto_pose /reset_karto_time /map_karto -O results/$FN.karto.bag" />
+    <node pkg="rosbag" type="record" name="record" args="/cpu_load /map_metadata /FeatureAssociationList /slam_karto/parameter_descriptions /visualization_marker_array /tf /slam_karto/parameter_updates /karto_pose /reset_karto_time /map_karto -O '$DIR/results/$FN.karto.bag'" />
 
-    <node pkg="rosbag" type="play" name="play" args="$FN" required="true"/>
+    <node pkg="rosbag" type="play" name="play" args="'$DIR/$FN' --clock" required="true"/>
+    <node pkg="cpu_load" type="cpu_load" name="cpu_load" args="slam_karto" />
 
   
 </launch>

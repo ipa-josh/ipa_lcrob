@@ -66,12 +66,12 @@ def simulate_odom(msg):
 	noise = np.random.normal(0, odom_noise, 6)
 	
 	msg_out.twist.twist.linear.x = msg.twist.twist.linear.x*(noise[0]+1)
-	msg_out.twist.twist.linear.y = msg.twist.twist.linear.x*(noise[1]+1)
-	msg_out.twist.twist.linear.z = msg.twist.twist.linear.x*(noise[2]+1)
+	msg_out.twist.twist.linear.y = msg.twist.twist.linear.y*(noise[1]+1)
+	msg_out.twist.twist.linear.z = msg.twist.twist.linear.z*(noise[2]+1)
 	
 	msg_out.twist.twist.angular.x = msg.twist.twist.angular.x*(noise[3]+1)
-	msg_out.twist.twist.angular.y = msg.twist.twist.angular.x*(noise[4]+1)
-	msg_out.twist.twist.angular.z = msg.twist.twist.angular.x*(noise[5]+1)
+	msg_out.twist.twist.angular.y = msg.twist.twist.angular.y*(noise[4]+1)
+	msg_out.twist.twist.angular.z = msg.twist.twist.angular.z*(noise[5]+1)
 	
 
 	return msg_out

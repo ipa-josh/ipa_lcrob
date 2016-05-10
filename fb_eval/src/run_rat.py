@@ -3,15 +3,16 @@
 import os, sys
 import rospkg
 
-for FN in sys.argv[1:]:
+FN_O = sys.argv[1]
+for FN in sys.argv[2:]:
 
 	rospack = rospkg.RosPack()
 	path = rospack.get_path('fb_eval')
 
 	#generate launch file
-	t = open(path+"/template", "r")
+	t = open(path+"/template_rat", "r")
 	f = open(path+"/eval.launch", "w")
-	f.write(t.read().replace("$FN", FN).replace("$DIR", os.getcwd()))
+	f.write(t.read().replace("$FN_O", FN_O).replace("$FN", FN).replace("$DIR", os.getcwd()))
 	f.close()
 	t.close()
 
