@@ -11,7 +11,7 @@ for FN in sys.argv[2:]:
 
 	#generate launch file
 	t = open(path+"/template_rat", "r")
-	f = open(path+"/eval.launch", "w")
+	f = open(path+"/eval_rat.launch", "w")
 	f.write(t.read().replace("$FN_O", FN_O).replace("$FN", FN).replace("$DIR", os.getcwd()))
 	f.close()
 	t.close()

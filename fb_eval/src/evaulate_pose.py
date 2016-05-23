@@ -33,8 +33,8 @@ def handle_pose(p):
 	last_pose = p
 	
 
-for fn_bag in sys.argv[1:]:
-	print fn_bag
+for fn_bag in sys.argv[2:]:
+	print "#",fn_bag
 	
 	last_pose=None
 	first_pose=None
@@ -44,8 +44,10 @@ for fn_bag in sys.argv[1:]:
 	poses_gt={}
 	ts_ms=[]
 	ts2id={}
+	locs = 0
+	max_id = -1
 
-	for fn in [fn_bag, "results/"+fn_bag+".karto.bag"]:
+	for fn in [sys.argv[1], fn_bag]:
 
 		bagin = rosbag.Bag(fn)
 
@@ -66,6 +68,11 @@ for fn_bag in sys.argv[1:]:
 					ts2id[msg.header.stamp] = msg.src_id
 					ts_ms.append(msg.header.stamp)
 					
+					if msg.src_id>=max_id:
+						max_id = msg.src_id
+					else:
+						locs += 1
+					
 				#if len(poses_gt)>100: break
 		finally:
 			bagin.close()
@@ -73,6 +80,8 @@ for fn_bag in sys.argv[1:]:
 	p_first_gt = poses_gt[min(poses_gt)]
 	p_first_ms = poses_ms[min(poses_ms)]
 	pose_id = {}
+	
+	print locs, len(ts2id)
 
 	missing=0
 	res = []

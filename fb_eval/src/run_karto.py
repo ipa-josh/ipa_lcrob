@@ -4,6 +4,7 @@ import os, sys
 import rospkg
 
 for FN in sys.argv[1:]:
+	if os.path.isfile(os.getcwd()+"/results/"+FN+".karto.bag"): continue
 
 	rospack = rospkg.RosPack()
 	path = rospack.get_path('fb_eval')
