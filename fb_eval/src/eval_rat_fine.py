@@ -3,6 +3,9 @@
 import sys
 import numpy as np
 
+def p(ts):
+	print np.average(ts), np.median(ts), min(ts), max(ts), np.percentile(ts, 25), np.percentile(ts, 75),
+
 for fn in sys.argv[1:]:
 	f = open(fn, 'r')
 	
@@ -37,10 +40,12 @@ for fn in sys.argv[1:]:
 		#	print mt,gt
 		num +=1
 	
-	print fn
-	print good,"/",num
-	print np.average(mts),"/",np.average(gts)
-	print np.average(mrs),"/",np.average(grs)
-	print np.median(mts),"/",np.median(gts)
-	print np.median(mrs),"/",np.median(grs)
+	print '"'+fn+'"', 
+	print good,num,
+	
+	p(mts)
+	p(gts)
+	p(mrs)
+	p(grs)
+	print ""
 			
