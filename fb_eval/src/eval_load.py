@@ -24,11 +24,11 @@ time_max=None
 
 try:
     for topic, msg, t in bagin.read_messages():
-		if time_min==None: time_min=t
-		else: time_min = min(time_min, t)
+        if time_min==None: time_min=t
+        else: time_min = min(time_min, t)
 		
-		if time_max==None: time_max=t
-		else: time_max = max(time_max, t)
+        if time_max==None: time_max=t
+        else: time_max = max(time_max, t)
 		
         if topic==topic_load:
             res_mem.append(sum(msg.proc_mem))
@@ -40,4 +40,4 @@ finally:
     
 for i in xrange(len(res_mem)):
 	print res_time[i], res_mem[i], times[i]-time_min
-print time_max-time_min
+print time_max, time_min, time_max-time_min

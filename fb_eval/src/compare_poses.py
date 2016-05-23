@@ -13,7 +13,6 @@ topic_scan="/scan"
 
 parser = argparse.ArgumentParser(description='')
 parser.add_argument('fn', type=str)
-parser.add_argument('out', type=str)
 
 args = parser.parse_args()
 

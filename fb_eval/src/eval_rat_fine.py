@@ -30,7 +30,7 @@ for fn in sys.argv[1:]:
 		if mt<0.3 and mr<0.8 and gt>0.05:
 			mts.append(mt)
 			gts.append(gt)
-		if mt<0.3 and mr<0.8 and gr>0.05:
+		if mt<0.3 and mr<0.16 and gr>0.03:
 			grs.append(gr)
 			mrs.append(mr)
 		#else:
