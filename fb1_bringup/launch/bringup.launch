@@ -5,6 +5,8 @@
     <include file="$(find irobotcreate2)/launch/state_publisher.launch" />
     <include file="$(find rplidar_ros)/launch/rplidar.launch" />
     <include file="$(find fb1_config)/launch/teleop.launch" />
+
+  <node name="proxy_server" pkg="topic_proxy" type="server" />
     
   <node name="usb_cam" pkg="usb_cam" type="usb_cam_node" output="screen" >
     <param name="video_device" value="/dev/video0" />
