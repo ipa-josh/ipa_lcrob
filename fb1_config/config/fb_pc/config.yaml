@@ -1,0 +1,5 @@
+fb_coverage: {min_moved_angle: 0.2, min_moved_dist: 0.2}
+fb_path_planning_node_v2: {collision_radius: 0.2, merge_tracks: 2, min_update_interval: 3,
+  mux_global_waypoint: /cmd_vel_dwa, mux_selection: /mux/select, mux_waypoint: /cmd_vel_linear,
+  overlap: 0.03, track_width: 0.35}
+fb_walltracking: {dist_center2wall: 0.3}
