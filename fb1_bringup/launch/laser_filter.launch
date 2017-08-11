@@ -1,0 +1,15 @@
+<launch>
+  <node pkg="laser_filters" type="scan_to_scan_filter_chain"
+      name="laser_filter">
+    <rosparam command="load" file="$(find fb1_config)/config/$(optenv ROBOT !!NO_ROBOT_SET!!)/laser_filter.yaml" />
+	<remap from="scan" to="/scan_unfiltered" />
+	<remap from="scan_filtered" to="/scan" />
+  </node>
+  
+  <node pkg="xyz_driver" type="filter_cloud_node" name="filter_cloud">
+	<remap from="/scan_filtered" to="/scan" />
+	<remap from="/scan_pc_unfiltered" to="/scan" />
+	<remap from="scan_pc_filtered" to="/scan_pc" />
+  </node>
+  
+</launch>
