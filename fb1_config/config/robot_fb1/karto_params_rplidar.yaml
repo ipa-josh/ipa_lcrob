@@ -1,3 +1,5 @@
+# radius over cleaning tool
+coverage_radius: 0.15
 
 # map frame
 map_frame: map_karto
