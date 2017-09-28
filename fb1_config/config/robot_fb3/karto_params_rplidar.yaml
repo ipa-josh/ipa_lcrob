@@ -1,0 +1,189 @@
+# radius over cleaning tool
+coverage_radius: 0.15
+
+# map frame
+map_frame: map_karto
+
+# odometry frame
+odom_frame: odom
+
+# wait for ipa_localization if true
+ipa_localization: false
+
+# update interval of the map [s]
+map_update_interval: 3.0
+
+# publish the transform every [0.05s]
+transform_publish_period: 0.05
+
+# map resolution [m]
+resolution: 0.05
+
+# max range of scan to be used for slam [m]
+max_scan_range: 6.0
+
+# time after startup of SLAM during which odometry is rated higher than scans [2.0s]
+delay: 2.0
+
+###
+### ScanMatcherParameters
+###
+# Variance of penalty for deviating from odometry when scan-matching.
+# The penalty is a multiplier (less than 1.0) is a function of the
+# delta of the scan position being tested and the odometric pose [0.09m²]/[0.1225rad²]
+# The smaller this value, the more is the odometry prefered over the scans
+distance_variance_penalty: 0.7
+angle_variance_penalty: 0.7
+# the same as above, but only used after reset until delay has passed
+distance_variance_penalty_start: 0.001
+angle_variance_penalty_start: 0.001
+
+# The range of angles to search during a coarse search and a finer search. Have to be a multiple of coarse_angle_resolution! [0.0035rad]/[0.35rad]
+fine_search_angle_offset: 0.034
+coarse_search_angle_offset: 0.34
+
+# Resolution of angles to search during a coarse search [0.035rad]
+coarse_angle_resolution: 0.034
+
+# Minimum value of the penalty multiplier so scores do not
+# become too small [0.9]/[0.5] 0.3 0.3
+minimum_angle_penalty: 0.9
+minimum_distance_penalty: 0.5
+# the same as above, but only used after reset until delay has passed 0.0001
+minimum_angle_penalty_start: 0.0001
+minimum_distance_penalty_start: 0.0001
+
+# whether to increase the search space if no good matches are initially found [false]
+use_response_expansion: false
+
+
+###
+### mapper parameters
+###
+# When set to true, the mapper will use a scan matching algorithm. In most real-world situations
+# this should be set to true so that the mapper algorithm can correct for noise and errors in
+# odometry and scan data. In some simulator environments where the simulated scan and odometry
+# data are very accurate, the scan matching algorithm can produce worse results. In those cases
+# set this to false to improve results.
+# Default value is [true].
+use_scan_matching: true
+
+
+# Default value is [true].
+use_scan_barycenter: true
+
+
+# Sets the minimum travel between scans.  If a new scan's position is more than minimumTravelDistance
+# from the previous scan, the mapper will use the data from the new scan. Otherwise, it will discard the
+# new scan if it also does not meet the minimum change in heading requirement.
+# For performance reasons, generally it is a good idea to only process scans if the robot
+# has moved a reasonable amount.
+# Default value is [0.2m].
+minimum_travel_distance: 0.2
+
+
+# Sets the minimum heading change between scans. If a new scan's heading is more than minimumTravelHeading
+# from the previous scan, the mapper will use the data from the new scan.  Otherwise, it will discard the
+# new scan if it also does not meet the minimum travel distance requirement.
+# For performance reasons, generally it is a good idea to only process scans if the robot
+# has moved a reasonable amount.
+# Default value is [10°] (to be specified in rad).
+minimum_travel_heading: 0.17
+
+
+# Scan buffer size is the length of the scan chain stored for scan matching.
+# "scanBufferSize" should be set to approximately "scanBufferMaximumScanDistance" / "minimumTravelDistance".
+# The idea is to get an area approximately 20 meters long for scan matching.
+# For example, if we add scans every minimumTravelDistance == 0.3 meters, then "scanBufferSize"
+# should be 20 / 0.3 = 67.)
+# Default value is [70].
+scan_buffer_size: 100
+
+
+# Scan buffer maximum scan distance is the maximum distance between the first and last scans
+# in the scan chain stored for matching.
+# Default value is [20.0].
+scan_buffer_maximum_scan_distance: 20.0
+
+
+# Scans are linked only if the correlation response value is greater than this value.
+# Default value is [0.4]
+link_match_minimum_response_fine: 0.3
+
+
+# Maximum distance between linked scans.  Scans that are farther apart will not be linked
+# regardless of the correlation response value.
+# Default value is [6.0m].
+link_scan_maximum_distance: 6.0
+
+# Defines the maximimum number of scans after a reset of the graph
+# which are integrated into the graph altough they don't fullfill the minimum travel distances
+# Default value is 0.
+#MaxScanCountAfterReset: 0    !!Parameter was removed!!
+
+###
+### correlation parrameters
+###
+# The size of the search grid used by the matcher.
+# Default value is [0.3m] which tells the matcher to use a 30cm x 30cm grid.
+correlation_search_space_dimension: 0.3
+
+
+# The resolution (size of a grid cell) of the correlation grid.
+# Default value is [0.01m].
+correlation_search_space_resolution: 0.01
+
+
+# The point readings are smeared by this value in X and Y to create a smoother response.
+# Default value is [0.03m].
+correlation_search_space_smear_deviation: 0.03
+
+
+###
+### Loop closure parameters
+###
+do_loop_closing: true
+
+# Scans less than this distance from the current position will be considered for a match
+# in loop closure.
+# Default value is [4.0m].
+loop_search_maximum_distance: 4.0
+
+
+# When the loop closure detection finds a candidate it must be part of a large
+# set of linked scans. If the chain of scans is less than this value we do not attempt
+# to close the loop.
+# Default value is [10].
+loop_match_minimum_chain_size: 10
+
+
+# The co-variance values for a possible loop closure have to be less than this value
+# to consider a viable solution. This applies to the coarse search.
+# Default value is [0.16].
+loop_match_maximum_variance_coarse: 0.3
+
+
+# If response is larger then this, then initiate loop closure search at the coarse resolution.
+# Default value is [0.7].
+loop_match_minimum_response_coarse: 0.35
+
+
+# If response is larger then this, then initiate loop closure search at the fine resolution.
+# Default value is [0.7].
+loop_match_minimum_response_fine: 0.35
+
+### loop closure correlation parameters
+
+# The size of the search grid used by the matcher.
+# Default value is [0.3m] which tells the matcher to use a 30cm x 30cm grid.
+loop_search_space_dimension: 0.9
+
+
+# The resolution (size of a grid cell) of the correlation grid.
+# Default value is [0.01m].
+loop_search_space_resolution: 0.01
+
+
+# The point readings are smeared by this value in X and Y to create a smoother response.
+# Default value is [0.03m]
+loop_search_space_smear_deviation: 0.03
