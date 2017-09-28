@@ -146,7 +146,7 @@ correlation_search_space_smear_deviation: 0.03
 ###
 ### Loop closure parameters
 ###
-do_loop_closing: false
+do_loop_closing: true
 
 # Scans less than this distance from the current position will be considered for a match
 # in loop closure.
