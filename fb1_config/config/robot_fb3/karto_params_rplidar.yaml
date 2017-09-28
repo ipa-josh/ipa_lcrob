@@ -11,7 +11,7 @@ odom_frame: odom
 ipa_localization: false
 
 # update interval of the map [s]
-map_update_interval: 3.0
+map_update_interval: 0.5
 
 # publish the transform every [0.05s]
 transform_publish_period: 0.05
@@ -20,7 +20,7 @@ transform_publish_period: 0.05
 resolution: 0.05
 
 # max range of scan to be used for slam [m]
-max_scan_range: 6.0
+max_scan_range: 2.5
 
 # time after startup of SLAM during which odometry is rated higher than scans [2.0s]
 delay: 2.0
@@ -32,8 +32,8 @@ delay: 2.0
 # The penalty is a multiplier (less than 1.0) is a function of the
 # delta of the scan position being tested and the odometric pose [0.09m²]/[0.1225rad²]
 # The smaller this value, the more is the odometry prefered over the scans
-distance_variance_penalty: 0.7
-angle_variance_penalty: 0.7
+distance_variance_penalty: 0.1
+angle_variance_penalty: 0.15
 # the same as above, but only used after reset until delay has passed
 distance_variance_penalty_start: 0.001
 angle_variance_penalty_start: 0.001
@@ -43,11 +43,11 @@ fine_search_angle_offset: 0.034
 coarse_search_angle_offset: 0.34
 
 # Resolution of angles to search during a coarse search [0.035rad]
-coarse_angle_resolution: 0.034
+coarse_angle_resolution: 0.035003819
 
 # Minimum value of the penalty multiplier so scores do not
 # become too small [0.9]/[0.5] 0.3 0.3
-minimum_angle_penalty: 0.9
+minimum_angle_penalty: 0.5
 minimum_distance_penalty: 0.5
 # the same as above, but only used after reset until delay has passed 0.0001
 minimum_angle_penalty_start: 0.0001
@@ -79,7 +79,8 @@ use_scan_barycenter: true
 # For performance reasons, generally it is a good idea to only process scans if the robot
 # has moved a reasonable amount.
 # Default value is [0.2m].
-minimum_travel_distance: 0.2
+#minimum_travel_distance: 0.2
+minimum_travel_distance: 0.15
 
 
 # Sets the minimum heading change between scans. If a new scan's heading is more than minimumTravelHeading
@@ -88,7 +89,7 @@ minimum_travel_distance: 0.2
 # For performance reasons, generally it is a good idea to only process scans if the robot
 # has moved a reasonable amount.
 # Default value is [10°] (to be specified in rad).
-minimum_travel_heading: 0.17
+minimum_travel_heading: 0.1
 
 
 # Scan buffer size is the length of the scan chain stored for scan matching.
@@ -103,18 +104,18 @@ scan_buffer_size: 100
 # Scan buffer maximum scan distance is the maximum distance between the first and last scans
 # in the scan chain stored for matching.
 # Default value is [20.0].
-scan_buffer_maximum_scan_distance: 20.0
+scan_buffer_maximum_scan_distance: 4.0
 
 
 # Scans are linked only if the correlation response value is greater than this value.
 # Default value is [0.4]
-link_match_minimum_response_fine: 0.3
+link_match_minimum_response_fine: 0.4
 
 
 # Maximum distance between linked scans.  Scans that are farther apart will not be linked
 # regardless of the correlation response value.
 # Default value is [6.0m].
-link_scan_maximum_distance: 6.0
+link_scan_maximum_distance: 2.0
 
 # Defines the maximimum number of scans after a reset of the graph
 # which are integrated into the graph altough they don't fullfill the minimum travel distances
@@ -136,7 +137,7 @@ correlation_search_space_resolution: 0.01
 
 # The point readings are smeared by this value in X and Y to create a smoother response.
 # Default value is [0.03m].
-correlation_search_space_smear_deviation: 0.03
+correlation_search_space_smear_deviation: 0.01
 
 
 ###
@@ -176,7 +177,7 @@ loop_match_minimum_response_fine: 0.35
 
 # The size of the search grid used by the matcher.
 # Default value is [0.3m] which tells the matcher to use a 30cm x 30cm grid.
-loop_search_space_dimension: 0.9
+loop_search_space_dimension: 0.5
 
 
 # The resolution (size of a grid cell) of the correlation grid.

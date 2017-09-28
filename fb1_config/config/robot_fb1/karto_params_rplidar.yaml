@@ -11,13 +11,13 @@ odom_frame: odom
 ipa_localization: false
 
 # update interval of the map [s]
-map_update_interval: 3.0
+map_update_interval: 0.5
 
 # publish the transform every [0.05s]
 transform_publish_period: 0.05
 
 # map resolution [m]
-resolution: 0.04
+resolution: 0.05
 
 # max range of scan to be used for slam [m]
 max_scan_range: 2.5
@@ -46,7 +46,7 @@ fine_search_angle_offset: 0.034
 coarse_search_angle_offset: 0.34
 
 # Resolution of angles to search during a coarse search [0.035rad]
-coarse_angle_resolution: 0.034
+coarse_angle_resolution: 0.035003819
 
 # Minimum value of the penalty multiplier so scores do not
 # become too small [0.9]/[0.5] 0.3 0.3
@@ -92,7 +92,7 @@ minimum_travel_distance: 0.15
 # For performance reasons, generally it is a good idea to only process scans if the robot
 # has moved a reasonable amount.
 # Default value is [10°] (to be specified in rad).
-minimum_travel_heading: 0.2
+minimum_travel_heading: 0.1
 
     
 # Scan buffer size is the length of the scan chain stored for scan matching.
@@ -140,7 +140,7 @@ correlation_search_space_resolution: 0.01
 
 # The point readings are smeared by this value in X and Y to create a smoother response.
 # Default value is [0.03m].
-correlation_search_space_smear_deviation: 0.03
+correlation_search_space_smear_deviation: 0.01
 
 
 ###
@@ -180,7 +180,7 @@ loop_match_minimum_response_fine: 0.35
 
 # The size of the search grid used by the matcher.
 # Default value is [0.3m] which tells the matcher to use a 30cm x 30cm grid.
-loop_search_space_dimension: 0.9
+loop_search_space_dimension: 0.5
 
 
 # The resolution (size of a grid cell) of the correlation grid.
