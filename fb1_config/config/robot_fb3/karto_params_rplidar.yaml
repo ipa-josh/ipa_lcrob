@@ -33,7 +33,7 @@ delay: 2.0
 # delta of the scan position being tested and the odometric pose [0.09m²]/[0.1225rad²]
 # The smaller this value, the more is the odometry prefered over the scans
 distance_variance_penalty: 0.2
-angle_variance_penalty: 0.15
+angle_variance_penalty: 0.2
 # the same as above, but only used after reset until delay has passed
 distance_variance_penalty_start: 0.001
 angle_variance_penalty_start: 0.001

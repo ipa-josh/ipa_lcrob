@@ -1,22 +1,10 @@
 <?xml version="1.0"?>
 <launch>
+	
+    <include file="$(find fb1_bringup)/robots/$(env ROBOT)/bringup.launch.xml" />
 
-    <include file="$(find create2_driver)/launch/odroid.launch" />
-    <include file="$(find irobotcreate2)/launch/state_publisher.launch" />
-    <include file="$(find rplidar_ros)/launch/rplidar.launch" />
     <include file="$(find fb1_config)/launch/teleop.launch" />
-
-  <node name="proxy_server" pkg="topic_proxy" type="server" />
-    
-  <node name="usb_cam" pkg="usb_cam" type="usb_cam_node" output="screen" >
-    <param name="video_device" value="/dev/video0" />
-    <param name="image_width" value="320" />
-    <param name="image_height" value="240" />
-    <param name="framerate" value="15" />
-    <param name="pixel_format" value="yuyv" />
-    <param name="camera_frame_id" value="usb_cam" />
-    <param name="io_method" value="mmap"/>
-  </node>
+    <node name="proxy_server" pkg="topic_proxy" type="server" />
   
 </launch>
 

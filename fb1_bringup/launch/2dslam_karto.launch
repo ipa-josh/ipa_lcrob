@@ -10,4 +10,6 @@
         <remap from="map" to="map_karto"/>
         <remap from="karto_association" to="FeatureAssociationList" />
     </node>
+
+    <include file="$(find fb_path_planning)/ros/launch/costmap.launch" />
 </launch>
