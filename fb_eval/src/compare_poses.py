@@ -6,6 +6,7 @@ from sensor_msgs.msg import LaserScan
 from geometry_msgs.msg import PoseStamped, Pose2D
 import numpy as np
 from tf import transformations
+import gtk.gdk
 
 #settings
 topic_gt="/optitrack_robot/pose1_stamped"
@@ -18,6 +19,28 @@ args = parser.parse_args()
 
 last_pose=None
 first_pose=None
+
+
+screenshot_cnt=0
+def make_screenshot():
+	global screenshot_cnt
+	
+	rospy.sleep(10.5)
+	
+	#ws = gtk.gdk.get_default_root_window().get_children()
+	#for w in ws: print w.property_get('WM_NAME')
+	
+	w = gtk.gdk.get_default_root_window()
+	sz = w.get_size()
+	#print "The size of the window is %d x %d" % sz
+	pb = gtk.gdk.Pixbuf(gtk.gdk.COLORSPACE_RGB,False,8,sz[0],sz[1])
+	pb = pb.get_from_drawable(w,w.get_colormap(),0,0,0,0,sz[0],sz[1])
+	screenshot_cnt+=1
+	if (pb != None):
+		pb.save("/tmp/screenshot"+str(screenshot_cnt)+".png","png")
+		#print "Screenshot saved to screenshot.png."
+	#else:
+	#	print "Unable to get the screenshot."
 
 def pose_to_matrix(p):
 	M = transformations.translation_matrix([p.position.x,p.position.y,p.position.z])
@@ -50,6 +73,11 @@ recv_pose=None
 
 def pose_cb(msg):
 	global recv_pose
+
+	#just for capturing
+	#if abs(msg.theta)<100: make_screenshot()
+	#print msg
+
 	recv_pose = msg
 
 rospy.init_node('cmpposes')
@@ -97,6 +125,8 @@ for ts in sorted(poses_gt):
 	if per_l!=per:
 		per_l=per
 		print >> sys.stderr, per_l,"%"
+		
+		#if per_l==8: break
 	
 	for ts2 in sorted(poses_gt):
 		if rospy.is_shutdown(): exit()
@@ -124,6 +154,8 @@ for ts in sorted(poses_gt):
 				for x in xrange(50):
 					if recv_pose!=None or rospy.is_shutdown(): break
 					rospy.sleep(0.01)
+					
+			rospy.sleep(0.05)
 			
 		Di = transformations.inverse_matrix(D)
 		#print "gt  ", transformations.euler_from_matrix(D, 'rxyz'), D[:3, 3]
@@ -148,6 +180,13 @@ for ts in sorted(poses_gt):
 			results[s1.header.stamp][s2.header.stamp] = r
 			
 		#print results[s1.header.stamp][s2.header.stamp]
+		
+		'''if results[s1.header.stamp][s2.header.stamp][0]>results[s1.header.stamp][s2.header.stamp][2]:
+			print "ohoh"
+			del results[s1.header.stamp][s2.header.stamp]
+			raw_input("Press Enter to continue...")'''
+		
+		#rospy.sleep(0.05)
 
 for k1 in results:
 	for k2 in results[k1]:

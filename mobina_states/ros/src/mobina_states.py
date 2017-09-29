@@ -6,7 +6,7 @@ import rospy
 import smach
 
 from mobina_interface.srv import *
-from turtlebot_node.srv import SetTurtlebotMode
+#from turtlebot_node.srv import SetTurtlebotMode
 
 import commands
 
