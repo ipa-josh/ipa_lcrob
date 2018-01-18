@@ -1,0 +1,309 @@
+% !TEX TS-program = pdflatex
+% !TEX encoding = UTF-8 Unicode
+
+% This is a simple template for a LaTeX document using the "article" class.
+% See "book", "report", "letter" for other types of document.
+
+\documentclass[11pt]{article} % use larger type; default would be 10pt
+
+\usepackage[utf8]{inputenc} % set input encoding (not needed with XeLaTeX)
+
+%%% Examples of Article customizations
+% These packages are optional, depending whether you want the features they provide.
+% See the LaTeX Companion or other references for full information.
+
+%%% PAGE DIMENSIONS
+\usepackage{geometry} % to change the page dimensions
+\geometry{a4paper} % or letterpaper (US) or a5paper or....
+% \geometry{margins=2in} % for example, change the margins to 2 inches all round
+% \geometry{landscape} % set up the page for landscape
+%   read geometry.pdf for detailed page layout information
+
+\usepackage{graphicx} % support the \includegraphics command and options
+
+% \usepackage[parfill]{parskip} % Activate to begin paragraphs with an empty line rather than an indent
+
+%%% PACKAGES
+\usepackage{booktabs} % for much better looking tables
+\usepackage{array} % for better arrays (eg matrices) in maths
+\usepackage{paralist} % very flexible & customisable lists (eg. enumerate/itemize, etc.)
+\usepackage{verbatim} % adds environment for commenting out blocks of text & for better verbatim
+\usepackage{subfig} % make it possible to include more than one captioned figure/table in a single float
+% These packages are all incorporated in the memoir class to one degree or another...
+
+\usepackage{tikz} % for much better looking tables
+\usepackage{framed} % for much better looking tables
+
+\usepackage{enumerate} 
+\usepackage{enumitem} 
+\usepackage{lmodern} 
+\usepackage{wasysym} 
+
+\usepackage{framed,xcolor}
+\colorlet{shadecolor}{red!25}
+
+%%% HEADERS & FOOTERS
+\usepackage{fancyhdr} % This should be set AFTER setting up the page geometry
+\pagestyle{fancy} % options: empty , plain , fancy
+\renewcommand{\headrulewidth}{0pt} % customise the layout...
+\lhead{}\chead{}\rhead{}
+\lfoot{}\cfoot{\thepage}\rfoot{}
+
+%%% SECTION TITLE APPEARANCE
+\usepackage{sectsty}
+\allsectionsfont{\sffamily\mdseries\upshape} % (See the fntguide.pdf for font help)
+% (This matches ConTeXt defaults)
+
+%%% ToC (table of contents) APPEARANCE
+\usepackage[nottoc,notlof,notlot]{tocbibind} % Put the bibliography in the ToC
+\usepackage[titles,subfigure]{tocloft} % Alter the style of the Table of Contents
+\renewcommand{\cftsecfont}{\rmfamily\mdseries\upshape}
+\renewcommand{\cftsecpagefont}{\rmfamily\mdseries\upshape} % No bold!
+
+%%% END Article customizations
+
+%%% The "real" document content comes below...
+\newcommand{\mb}{MobiNa}
+
+\title{\mb{} - Anleitung}
+\author{Joshua Hampp}
+%\date{} % Activate to display a given date or no date (if empty),
+         % otherwise the current date is printed 
+
+\begin{document}
+\maketitle
+
+\section{Einschalten}
+
+\begin{figure}[h]
+\centering
+\scalebox{0.7}{
+\begin{tikzpicture}
+    \tikzstyle{every node}=[font=\Large]
+
+    \node[anchor=south west,inner sep=0] at (0,0) {\includegraphics[width=\textwidth]{imgs/irobot.jpg}};
+
+    \draw[red,ultra thick,rounded corners] (2.8,4.7) rectangle (4.4,6);
+
+\end{tikzpicture}
+}
+	\caption{Power-Knopf}
+	\label{turn_on}
+\end{figure}
+
+Zum Einschalten den Deckel anheben und den Power-Knopf (Abb. \ref{turn_on}) drücken.
+Daraufhin piepst \mb{} einmal und der Kopf fährt eventuell herunter.
+Sobald das System komplett gestartet ist fährt der Kopf in die Ausgangsposition (senkrecht zum Boden) zurück und piepst ein zweites mal.
+
+\section{Ausschalten}
+
+Schalten Sie am Abend das Tablet und den Roboter aus.
+Dazu befindet sich seitlich am Tablet ein Knopf über der Lautstärkeregelung (Abb. \ref{volume}). Diesen gedrückt halten bis die Option "Ausschalten" auf dem Display erscheint.
+Für den Roboter drücken Sie einmal auf den Power-Knopf (Abb. \ref{turn_on}) ohne angeschlossenes Ladegerät.
+
+\section{Bitte beachten Sie ...}
+
+Bevor Sie \mb{} anschalten, stellen Sie bitte sicher:
+\begin{itemize}
+	\item Router (schwarzer Kasten mit Antennen) ist an und leuchtet (blau)
+	\item der Bildschirm des Tablets ist an und ausreichend geladen (ca. 50\%)
+	\item die Abdeckung befindet sich auf \mb{}
+\end{itemize}
+
+\begin{shaded}
+Sollte das Tablet nicht ausreichend geladen sein, entfernen Sie das eingesteckte Kabel und nutzen Sie das beiliegende Ladegerät für das Tablet, um das Tablet zu laden.
+\end{shaded}
+\section{Einsatz}
+
+Ist \mb{} nicht im aktiven Einsatz, muss \mb{} auf dem Podest stehen und das Ladegerät angeschlossen sein.
+Für die Vorführung wird das Ladegerät entfernt und \mb{} auf die Markierungen gestellt.
+Es sollte dabei auf die \textbf{genaue Ausrichtung} geachtet werden.
+
+\section{Bedienung per Joystick}
+
+Für die Steuerung von\mb{} muss zunächst die gewünschte Funktion ausgewählt werden:
+\begin{description}
+	\item[Totmanntaster (5)] erlaubt das fahren und bewegen des Kopfes.
+	\item[LED (4)] erlaubt das verändern der Beleuchtung.
+	\item[Script (Back)] startet Programme, wie z.~B. den Schnelltest.
+\end{description}
+
+\subsection{Totmanntaster}
+Wenn der \textbf{Totmanntaster} gedrückt ist, können folgende Tasten verwendet werden:
+\begin{description}
+	\item[(1)] dreht \mb{}.
+	\item[(2)] bewegt \mb{} vor und zurück.
+	\item[(3) und (4)] bewegt den Kopf.
+\end{description}
+
+\subsection{LED}
+Wenn der \textbf{LED-Taster} gedrückt ist, können folgende Tasten verwendet werden:
+\begin{description}
+	\item[(B) mit (3)] verändert die Helligkeit der roten Farbe.
+	\item[(A) mit (3)] verändert die Helligkeit der grünen Farbe.
+	\item[(X) mit (3)] verändert die Helligkeit der blauen Farbe.
+\end{description}
+
+\subsection{Programm}
+Wenn der \textbf{Programm-Taster} (Back) und \textbf{Totmanntaster} gedrückt ist, können folgende Tasten verwendet werden:
+\begin{description}
+	\item[(A)] startet simulierten Sturz.
+	\item[(B)] startet Schnelltest.
+\end{description}
+
+\section{Fehlerbehandlung}
+
+\begin{figure}[h]
+\centering
+\scalebox{0.7}{
+\begin{tikzpicture}
+    \tikzstyle{every node}=[font=\Large]
+
+    \node[anchor=south west,inner sep=0] at (0,0) {\includegraphics[width=\textwidth]{imgs/xperia.jpg}};
+
+    \draw[red,ultra thick,rounded corners] (13.1,6.5) rectangle (14,9);
+
+\end{tikzpicture}
+}
+	\caption{Lautstärkeregler des Tablets}
+	\label{volume}
+\end{figure}
+
+Im Fehlerfall führen Sie zunächst den Schnelltest (siehe S. \ref{check}) aus.
+Sollte kein Ton zu hören sein, prüfen Sie bitte die Lautstärke des Tablets (siehe Abbildung \ref{volume}).
+
+\clearpage
+\newpage
+\begin{minipage}{\textwidth}
+
+\section{Schnelltest}\label{check}
+
+\begin{enumerate}
+\item \mb{} per Joystick vor und rückwärts fahren
+	\begin{itemize}[label={\Square}] 
+	\item Hat Funktioniert?
+	\end{itemize}
+
+\item Kopf per Joystick bewegen
+	\begin{itemize}[label={\Square}] 
+	\item Hat Funktioniert?
+	\end{itemize}
+
+\item Schnelltest per Joystick starten und Checkliste in gegebener Reihenfolge abhacken
+	\begin{description}
+	\item[Schnelltest starten:] Totmanntaste + Scripttaste + Grüne Taste (A) gleichzeitig drücken
+	\end{description}
+
+\end{enumerate}
+
+\begin{tabular}{| l | c |}
+    \hline
+    \textbf{Aktion} &\textbf{Erfolgreich} \\ \hline
+    Rot leuchten &  \\ \hline
+    Grün leuchten &  \\ \hline
+    Blau leuchten &  \\ \hline
+    Tablet steht senkrecht &  \\ \hline
+    Tablet neight sich nach vorne &  \\ \hline
+    Tablet steht senkrecht &  \\ \hline
+    Grün leuchten &  \\ \hline
+    Bildschirm (Tablet) an &  \\ \hline
+    Film wird auf Tablet abgespielt &  \\
+    \hline
+  \end{tabular}
+
+\end{minipage}
+
+\clearpage
+\newpage
+\begin{minipage}{\textwidth}
+
+\section{Tastenbelegung des Joysticks}
+
+\begin{center}
+\scalebox{0.8}{
+\begin{tikzpicture}
+    \tikzstyle{every node}=[font=\Large]
+
+    \node[anchor=south west,inner sep=0] at (0,0) {\includegraphics[width=\textwidth]{imgs/joy_top.jpg}};
+
+    \draw[red,ultra thick,rounded corners] (8.6,2.2) rectangle node {1} (10.6,4.2);
+    \draw[red,ultra thick,rounded corners] (4.4,2.2) rectangle node {2} (6.4,4.2);
+    \draw[red,ultra thick,rounded corners] (2,4.4) rectangle node {3} (4.5,6.9);
+    \draw[red,ultra thick,rounded corners] (5.2,6.2) rectangle node {Back} (6.8,7);
+
+\end{tikzpicture}
+}
+\end{center}
+
+\begin{center}
+\scalebox{0.8}{
+\begin{tikzpicture}
+    \tikzstyle{every node}=[font=\Large]
+
+    \node[anchor=south west,inner sep=0] at (0,0) {\includegraphics[width=\textwidth]{imgs/joy_back.jpg}};
+
+    \draw[red,ultra thick,rounded corners] (11.1,2.5) rectangle node {4} (13.4,4.5);
+    \draw[red,ultra thick,rounded corners] (1.5,2.5) rectangle node {5} (3.7,4.5);
+
+\end{tikzpicture}
+}
+\end{center}
+
+\begin{center}
+\begin{tabular}{| l | r |}
+    \hline
+    \textbf{Taste} &\textbf{Funktion} \\ \hline
+    1 & Drehung \\ \hline
+    2 & Beschleunigung \\ \hline
+    3 & Kopf neigen/Helligkeit einstellen \\ \hline
+    4 & Beleuchtungsfunktion auswählen \\ \hline
+    Back & Programmwahl \\ \hline
+    X & Blau \\ \hline
+    Y & Kopf auswählen \\ \hline
+    A& Grün/simulierter Sturz \\ \hline
+    B & Rot/Schnelltest \\
+    \hline
+  \end{tabular}
+\end{center}
+
+\end{minipage}
+
+
+\clearpage
+\newpage
+\section{Kontaktpersonen}
+
+Bei Problemen melden Sie sich bitte bei:
+
+\begin{framed}
+{\parindent0pt
+Joshua Hampp \\
+Telefon +49 711 970-1843 \\
+joshua.hampp@ipa.fraunhofer.de
+}\end{framed}
+
+oder
+
+\begin{framed}
+{\parindent0pt
+Ralf Simon King \\
+Telefon +49 711 970-1260 \\
+ralf-simon.king@ipa.fraunhofer.de
+}\end{framed}
+
+
+\newpage
+\section{Packliste}
+\begin{itemize}
+	\item \mb{}
+	\item Netzteil für \mb{}
+	\item Router
+	\item Netzteil für Router
+	\item 2 Netzwerkkabel
+	\item Tablet
+	\item Netzteil und Ladekabel für das Tablet
+	\item 3 Anleitungen
+%	\item Notfallumschlag mit SD-Karte
+\end{itemize}
+
+\end{document}
